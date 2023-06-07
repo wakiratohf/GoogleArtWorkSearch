@@ -1,4 +1,4 @@
-package com.music.googleartworksearch;
+package com.music.googleartworksearch.finder;
 
 public interface FinderCloseableRequest {
     void close();

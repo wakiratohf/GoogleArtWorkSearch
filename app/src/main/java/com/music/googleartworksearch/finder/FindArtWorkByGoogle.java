@@ -1,10 +1,12 @@
-package com.music.googleartworksearch;
+package com.music.googleartworksearch.finder;
 
 import android.content.Context;
 import android.net.Uri;
 import android.webkit.WebSettings;
 
 import androidx.annotation.NonNull;
+
+import com.music.googleartworksearch.utils.DebugLog;
 
 import java.io.IOException;
 import java.util.ArrayList;

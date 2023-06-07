@@ -1,4 +1,4 @@
-package com.music.googleartworksearch;
+package com.music.googleartworksearch.finder;
 
 import androidx.annotation.NonNull;
 

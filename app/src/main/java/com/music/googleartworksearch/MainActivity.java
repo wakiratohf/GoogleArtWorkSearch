@@ -2,7 +2,6 @@ package com.music.googleartworksearch;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -10,6 +9,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.music.googleartworksearch.finder.FindArtWorkByGoogle;
+import com.music.googleartworksearch.utils.EqualSpaceItemDecoration;
 
 import java.util.List;
 

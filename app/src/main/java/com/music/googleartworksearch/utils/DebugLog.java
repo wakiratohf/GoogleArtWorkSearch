@@ -1,4 +1,4 @@
-package com.music.googleartworksearch;
+package com.music.googleartworksearch.utils;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

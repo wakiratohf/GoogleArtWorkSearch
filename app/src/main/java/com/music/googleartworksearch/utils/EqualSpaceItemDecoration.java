@@ -1,4 +1,4 @@
-package com.music.googleartworksearch;
+package com.music.googleartworksearch.utils;
 
 import android.graphics.Rect;
 import android.view.View;
