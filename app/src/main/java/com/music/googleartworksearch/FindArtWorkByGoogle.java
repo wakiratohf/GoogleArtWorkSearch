@@ -25,8 +25,13 @@ import okhttp3.ResponseBody;
 
 public class FindArtWorkByGoogle {
 
-    public static FinderCloseableRequest find(Context context, String songName, Function1<List<String>, Void> callback) {
-        String finalUrl = String.format("https://www.google.com/search?site=imghp&tbm=isch&source=hp&q=%s&tbs=isz:l", Uri.encode(songName));
+    public static FinderCloseableRequest find(Context context, String artistName, String albumName, Function1<List<String>, Void> callback) {
+        String finalKeyword = "Album " + artistName + " " + albumName;
+        return find(context, finalKeyword, callback);
+    }
+
+    public static FinderCloseableRequest find(Context context, String keyword, Function1<List<String>, Void> callback) {
+        String finalUrl = String.format("https://www.google.com/search?site=imghp&tbm=isch&source=hp&q=%s&tbs=isz:l", Uri.encode(keyword));
         Request request = new Request.Builder()
                 .url(finalUrl)
                 .build();
@@ -73,7 +78,7 @@ public class FindArtWorkByGoogle {
         });
         return () -> {
             if (!call.isCanceled()) {
-                DebugLog.logd("Cancel request " + songName);
+                DebugLog.logd("Cancel request " + keyword);
                 call.cancel();
             }
         };
