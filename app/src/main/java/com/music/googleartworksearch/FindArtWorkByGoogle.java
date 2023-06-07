@@ -73,7 +73,6 @@ public class FindArtWorkByGoogle {
                 } catch (Exception e) {
                     DebugLog.loge(e);
                 }
-                sendEmptyCallback(callback);
             }
         });
         return () -> {
@@ -86,8 +85,12 @@ public class FindArtWorkByGoogle {
 
     private static void doGetArtWorks(String htmlString, Function1<List<String>, Void> callback) {
         List<String> listImageFromHtml = getListImageFromHtml(htmlString);
-        if (callback != null) {
-            callback.invoke(listImageFromHtml);
+        if (listImageFromHtml.isEmpty()) {
+            sendEmptyCallback(callback);
+        } else {
+            if (callback != null) {
+                callback.invoke(listImageFromHtml);
+            }
         }
     }
 
