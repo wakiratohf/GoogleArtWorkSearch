@@ -104,7 +104,11 @@ public class FindArtWorkByGoogle {
             }
             String group = matcher.group();
             if (group.length() > 20 && !group.contains("?url=")) {
-                arrayList.add(group.substring(5, group.length() - 1));
+                String url = group.substring(5, group.length() - 1);
+                if (url.endsWith(".svg")) {
+                    continue;
+                }
+                arrayList.add(url);
             }
         }
         return arrayList;
