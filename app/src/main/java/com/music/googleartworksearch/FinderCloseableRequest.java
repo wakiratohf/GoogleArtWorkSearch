@@ -1,5 +1,5 @@
 package com.music.googleartworksearch;
 
-public interface ILyricFinderCloseableRequest {
+public interface FinderCloseableRequest {
     void close();
 }

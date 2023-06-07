@@ -2,7 +2,6 @@ package com.music.googleartworksearch;
 
 import android.content.Context;
 import android.net.Uri;
-import android.util.Log;
 import android.webkit.WebSettings;
 
 import androidx.annotation.NonNull;
@@ -26,7 +25,7 @@ import okhttp3.ResponseBody;
 
 public class FindArtWorkByGoogle {
 
-    public static ILyricFinderCloseableRequest find(Context context, String songName, Function1<List<String>, Void> callback) {
+    public static FinderCloseableRequest find(Context context, String songName, Function1<List<String>, Void> callback) {
         String finalUrl = String.format("https://www.google.com/search?site=imghp&tbm=isch&source=hp&q=%s&tbs=isz:l", Uri.encode(songName));
         Request request = new Request.Builder()
                 .url(finalUrl)
