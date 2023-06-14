@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         EditText edKeyword = findViewById(R.id.ed_keyword);
         findViewById(R.id.bt_search).setOnClickListener(v -> FindArtWorkByGoogle.find(this, edKeyword.getText().toString().trim(), images -> {
             runOnUiThread(() -> displayImages(images));
-            return null;
         }));
 
 //        FindArtWorkByGoogle.find(this, "Trung Hiếu", "NhacCuaTui.com", images -> {

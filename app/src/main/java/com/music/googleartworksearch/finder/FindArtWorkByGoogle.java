@@ -16,7 +16,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import kotlin.jvm.functions.Function1;
+import androidx.core.util.Consumer;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.ConnectionPool;
@@ -27,12 +28,12 @@ import okhttp3.ResponseBody;
 
 public class FindArtWorkByGoogle {
 
-    public static FinderCloseableRequest find(Context context, String artistName, String albumName, Function1<List<String>, Void> callback) {
+    public static FinderCloseableRequest find(Context context, String artistName, String albumName, Consumer<List<String>> callback) {
         String finalKeyword = "Album " + artistName + " " + albumName;
         return find(context, finalKeyword, callback);
     }
 
-    public static FinderCloseableRequest find(Context context, String keyword, Function1<List<String>, Void> callback) {
+    public static FinderCloseableRequest find(Context context, String keyword, Consumer<List<String>> callback) {
         String finalUrl = String.format("https://www.google.com/search?site=imghp&tbm=isch&source=hp&q=%s&tbs=isz:l", Uri.encode(keyword));
         Request request = new Request.Builder()
                 .url(finalUrl)
@@ -74,24 +75,25 @@ public class FindArtWorkByGoogle {
                     doGetArtWorks(htmlString, callback);
                 } catch (Exception e) {
                     DebugLog.loge(e);
+                    sendEmptyCallback(callback);
                 }
             }
         });
         return () -> {
             if (!call.isCanceled()) {
-                DebugLog.logd("Cancel request " + keyword);
+                DebugLog.logd("Cancel request with keyword  " + keyword);
                 call.cancel();
             }
         };
     }
 
-    private static void doGetArtWorks(String htmlString, Function1<List<String>, Void> callback) {
+    private static void doGetArtWorks(String htmlString, Consumer<List<String>> callback) {
         List<String> listImageFromHtml = getListImageFromHtml(htmlString);
         if (listImageFromHtml.isEmpty()) {
             sendEmptyCallback(callback);
         } else {
             if (callback != null) {
-                callback.invoke(listImageFromHtml);
+                callback.accept(listImageFromHtml);
             }
         }
     }
@@ -116,9 +118,9 @@ public class FindArtWorkByGoogle {
         return arrayList;
     }
 
-    private static void sendEmptyCallback(Function1<List<String>, Void> callback) {
+    private static void sendEmptyCallback(Consumer<List<String>> callback) {
         if (callback != null) {
-            callback.invoke(Collections.emptyList());
+            callback.accept(Collections.emptyList());
         }
     }
 }
